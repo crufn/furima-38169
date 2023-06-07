@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root 'proto#index'
+  root to: 'proto#index'
+
+  resources :orders, only:[:create]
 end
