@@ -8,7 +8,7 @@
 | first_name | string | null: false |
 | first_kata | string | null: false |
 | email      | string | null: false, unique: true |
-| password   | encrypted_password | null: false |
+| encrypted_password | encrypted_password | null: false |
 | birthday   | date   | null: false |
 
 ### items
@@ -18,12 +18,12 @@
 | item_name       | string  | null: false                   |
 | item_explanation| text    | null: false                   |
 | price           | integer | null: false                   |
-| categories      | integer | null: false                   |
+| category_id     | integer | null: false                   |
 | condition_id    | integer | null: false                   |
 | deliverycharge_id | integer  | null: false                |
 | daysdelivery_id | integer | null: false                   |
 | region_id       | integer | null: false                   |
-| user_id         | integer | null: false                   |
+| user            | references | null: false, foreign_key: true |
 
 ### purchase_records
 
@@ -36,13 +36,13 @@
 
 | Column              | Type    | Options                       |
 |---------------------|---------|-------------------------------|
+| purchase_records    | string  |                               |
 | shipping_id         | integer | null: false                   |
-| city                | string  | null: false                   |
+| region_id           | string  | null: false                   |
 | address             | string  | null: false                   |
 | building_name       | string  |                               |
 | phone_number        | string  | null: false                   |
 | postal_code         | string  | null: false                   |
-| street_address      | string  | null: false                   |
 
 ### Associations
 
