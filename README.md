@@ -36,8 +36,8 @@
 
 | Column              | Type    | Options                       |
 |---------------------|---------|-------------------------------|
-| purchase_records    | references | null: false, foreign_key: true |
-| region_id           | string  | null: false                   |
+| purchase_record     | references | null: false, foreign_key: true |
+| region_id           | integer | null: false                   |
 | city                | string  | null: false                   |
 | address             | string  | null: false                   |
 | building_name       | string  |                               |
@@ -52,7 +52,7 @@
 
 - Itemモデル
   - belongs_to :user
-  - has_one :purchase_records
+  - has_one :purchase_record
 
 - PurchaseRecordモデル
   - belongs_to :user
