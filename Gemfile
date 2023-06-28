@@ -61,7 +61,4 @@ group :production do
   gem 'pg'
 end
 
-<<<<<<< HEAD
 gem 'devise'
-=======
->>>>>>> main
