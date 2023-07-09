@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root to: 'proto#index'
 
   resources :orders, only:[:create]
+  resources :users
+  resources :proto, only: [:index, :new]
 end
