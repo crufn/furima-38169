@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates :first_kata, presence: true, format: { with: KATAKANA_REGEXP }
   validates :email, presence: true
   validates :birthday, presence: true
+  validates :password, presence: true, length: { minimum: 6 }
 
 
 end
