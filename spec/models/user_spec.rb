@@ -80,34 +80,47 @@ describe 'ユーザー新規登録' do
     it 'passwordは、半角英数字での入力が必須' do
       @user.password = 'パスワード'
       @user.password_confirmation = 'パスワード'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
+    
     it '名前はカタカナでの入力が必須であること' do       
       @user.family_kata = 'ひらがな'
       @user.first_kata = 'ひらがな'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family kata is invalid", "First kata is invalid")
     end
+    
     it '英字のみのパスワードでは設定できない' do
       @user.password = 'password'
       @user.password_confirmation = 'password'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
+    
     it '数字のみのパスワードでは設定できない' do
       @user.password = '123456'
       @user.password_confirmation = '123456'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
+    
     it '姓（全角）に半角文字が含まれていると登録できない' do
       @user.family_name = 'Yamada'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family name is invalid")
     end
+    
     it '名（全角）に半角文字が含まれていると登録できない' do
       @user.first_name = 'Taro'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
     end
+    
     it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
       @user.family_kata = 'やまだ'
-      expect(@user).not_to be_valid
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Family kata is invalid")
     end
   end
 end
