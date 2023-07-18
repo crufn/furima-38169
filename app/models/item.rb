@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  has_one_attached :image
+  
   validates :item_name, presences: true
   validates :item_explanation, presences: true
   validates :price, presences: true

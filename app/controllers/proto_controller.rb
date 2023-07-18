@@ -19,7 +19,7 @@ class ProtoController < ApplicationController
 
   private
   def proto_params
-    params.require(:proto).permit(:nickname, :email, :family_name, :first_name, :family_kata, :first_kata, :birthday)
+    params.require(:proto).permit(:nickname, :email, :family_name, :first_name, :family_kata, :first_kata, :birthday, :image)
   end
 
   def move_to_index
