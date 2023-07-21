@@ -5,7 +5,7 @@ class ProtoController < ApplicationController
   end
 
   def new
-    @proto = Proto.new
+    @item = Item.new
   end
 
   def create
