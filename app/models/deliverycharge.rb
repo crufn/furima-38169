@@ -6,5 +6,5 @@ class Deliverycharge < ActiveHash::Base
   ]
 
     include ActiveHash::Associations
-    has_many :deliverycharge
+    has_many :items
   end
