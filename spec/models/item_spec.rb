@@ -43,12 +43,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Deliverycharge can't be blank")
       end
       it 'regionが空だと登録できない' do
-        @item.region = nil
+        @item.region_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Region can't be blank")
       end
       it 'daysdeliveryが空だと登録できない' do
-        @item.daysdelivery = nil
+        @item.daysdelivery_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Daysdelivery can't be blank")
       end
