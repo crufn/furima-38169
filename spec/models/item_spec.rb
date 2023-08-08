@@ -52,6 +52,16 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Daysdelivery can't be blank")
       end
+      it 'priceが300円未満では出品ができない' do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price 300円以上または9999999円以下で入力してください")
+      end
+      it 'priceが9,999,999以上だと保存できない' do
+        @item.price = 10_000_000
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price 300円以上または9999999円以下で入力してください")
+      end
     end
   end
 end

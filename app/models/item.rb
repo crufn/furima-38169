@@ -4,16 +4,17 @@ class Item < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
 
-  belongs_to :category
-  belongs_to :condition
-  belongs_to :deliverycharge
+  belongs_to_active_hash :category
+  belongs_to_active_hash :condition
+  belongs_to_active_hash :deliverycharge
   belongs_to :user
   
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :item_explanation, presence: true, length: { maximum: 1000 }
   validates :price, presence: true,
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 },
-                    format: { with: /\A[0-9]+\z/, message: "半角数字のみ入力してください" }
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, only_integer: true,
+                       message: "300円以上または9999999円以下で入力してください"
+                       }
   validates :category_id, presence: true, numericality: { other_than: 1 }
   validates :condition_id, presence: true, numericality: { other_than: 1 }
   validates :deliverycharge_id, presence: true, numericality: { other_than: 1 }
