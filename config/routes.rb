@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'proto#index'
+  root to: 'items#index'
 
   resources :orders
   resources :users
-  resources :proto
+  resources :items
 end
