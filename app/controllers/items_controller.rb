@@ -18,6 +18,13 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    @item = Item.find(params[:id])
+    @user = @item.user
+    @is_same_user = current_user == @user
+    @is_own_item = @user == current_user
+  end
+
   private
 
   def item_params
