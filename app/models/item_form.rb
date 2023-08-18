@@ -1,17 +1,8 @@
-class Item < ApplicationRecord
+class ItemForm
+  include ActiveModel::Model
 
-  has_one_attached :image
+  attr_accessor :item_name, :item_explanation, :price, :category_id, :condition_id, :deliverycharge_id, :image, :region_id, :daysdelivery_id
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-
-  belongs_to_active_hash :category
-  belongs_to_active_hash :condition
-  belongs_to_active_hash :deliverycharge
-  belongs_to_active_hash :daysdelivery
-  belongs_to_active_hash :region
-  belongs_to :user
-  hs_one :order
-  
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :item_explanation, presence: true, length: { maximum: 1000 }
   validates :price, presence: true,
@@ -25,4 +16,22 @@ class Item < ApplicationRecord
   validates :region_id, presence: true, numericality: { other_than: 1 }
   validates :image, presence:true
 
+  def save
+    return false unless valid?
+
+    item = Item.new(
+      item_name: item_name,
+      item_explanation: item_explanation,
+      price: price,
+      category_id: category_id,
+      condition_id: condition_id,
+      deliverycharge_id: deliverycharge_id,
+      image: image,
+      region_id: region_id,
+      daysdelivery_id: daysdelivery_id,
+      user_id: user_id
+    )
+
+    item.save
+  end
 end
