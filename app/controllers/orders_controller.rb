@@ -6,24 +6,25 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @shipping_address = ShippingAddress.new
+    @order = Order.new
   end
 
   def create
     @item = Item.find(params[:item_id])
-    @shipping_address = ShippingAddress.new(address_params)
-    if @shipping_address.valid?
-       @shipping_address.save
+    @order = Order.new(order_params)
+    @user = User.find(current_user.id)
+    if @order.valid?
+       @order.save
        redirect_to root_path
     else
       render :index
     end
   end
-
+ 
   private
 
-  def address_params
-    params.require(:shipping_address).permit(:region_id, :city, :address, :building_name, :phone_number, :postal_code)
+  def order_params
+    params.require(:order).permit(:region_id, :city, :address, :building_name, :phone_number, :postal_code)
   end
   
 end

@@ -1,11 +1,7 @@
 class Order < ApplicationRecord
 
   include ActiveModel::Model
-  attr_accessor :region_id, :city, :address, :building_name, :building_name, :phone_number, :postal_code
-  
-  belongs_to :user
-  belongs_to :item
-  belongs_to :shipping_address
+  attr_accessor :region_id, :city, :address, :building_name, :building_name, :phone_number, :postal_code, :user_id, :item_id
 
   with_options presence: true do
     validates :region_id, presence: true
@@ -16,8 +12,8 @@ class Order < ApplicationRecord
   end
 
   def save
-    purchase_record = Purchase_record.create(item_id: item_id, user_id: user_id)
-    ShippingAddress.create(region_id: region_id, city: city, address: address, phone_number: phone_number, postal_code: postal_code)
+    purchase_record = PurchaseRecord.create(item_id: self.item_id, user_id: self.user_id)
+    shipping_address = ShippingAddress.create(region_id: self.region_id, city: self.city, address: self.address, phone_number: self.phone_number, postal_code: self.postal_code)
   end
 
 end
