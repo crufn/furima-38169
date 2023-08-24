@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :daysdelivery
   belongs_to_active_hash :region
   belongs_to :user
-  hs_one :order
+  has_one :purchase_record
   
   validates :item_name, presence: true, length: { maximum: 40 }
   validates :item_explanation, presence: true, length: { maximum: 1000 }

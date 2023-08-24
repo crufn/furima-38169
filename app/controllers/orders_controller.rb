@@ -2,22 +2,28 @@ class OrdersController < ApplicationController
 
   def index
     @order = Order.new
+    @item = Item.find(params[:item_id])
+  end
+
+  def new
+    @shipping_address = ShippingAddress.new
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
-      @order.save
-      return redirect_to root_path
+    @item = Item.find(params[:item_id])
+    @shipping_address = ShippingAddress.new(address_params)
+    if @shipping_address.valid?
+       @shipping_address.save
+       redirect_to root_path
     else
-      render 'index'
+      render :index
     end
   end
 
   private
 
-  def order_params
-    params.require(:order).permit(:price)
+  def address_params
+    params.require(:shipping_address).permit(:region_id, :city, :address, :building_name, :phone_number, :postal_code)
   end
   
 end
