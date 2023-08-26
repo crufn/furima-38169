@@ -23,6 +23,6 @@ class Item < ApplicationRecord
   validates :deliverycharge_id, presence: true, numericality: { other_than: 1 }
   validates :daysdelivery_id, presence: true, numericality: { other_than: 1 }
   validates :region_id, presence: true, numericality: { other_than: 1 }
-  validates :image, presence:true
+
 
 end
