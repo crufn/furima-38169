@@ -10,6 +10,10 @@ RSpec.describe Order, type: :model do
       it 'すべての情報が正しく入力されていれば登録ができる' do
         expect(@order).to be_valid
       end
+      it '建物名が空でも登録できる' do
+        @order.building_name = ''
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Building name must be other than 1")
     end
     context 'できないとき' do
       it 'region_idが空だと登録できない' do
@@ -41,6 +45,21 @@ RSpec.describe Order, type: :model do
         @order.token = ''
         @order.valid?
         expect(@order.errors.full_messages).to include("Token can't be blank")
+      end
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
+        @order.phone_number = '123456789'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
+        @order.phone_number = '123456789000'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能なこと' do
+        @order.phone_number = '１２３４５６７８９'
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Phone number can't be blank")
       end
     end
   end

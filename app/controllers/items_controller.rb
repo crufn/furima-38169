@@ -30,6 +30,10 @@ class ItemsController < ApplicationController
     if @item.user != current_user
       redirect_to root_path
     end
+
+    if @item.purchase_record.present?
+      redirect_to root_path
+    end
   end
 
   def update
