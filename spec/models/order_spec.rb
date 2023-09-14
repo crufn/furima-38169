@@ -64,6 +64,21 @@ RSpec.describe Order, type: :model do
         @order.valid?
         expect(@order.errors.full_messages).to include("Phone number は10桁以上11桁以内の半角数字で入力してください")
       end
+      it '郵便番号が半角ハイフンを含む形でなければ購入できない' do
+        @order.postal_code = '1234567'
+        @order.valid?
+      expect(@order.errors.full_messages).to include("Postal code は「3桁ハイフン4桁」の形式で入力してください")
+      end
+      it 'userが紐づいてなければ購入できない' do
+        @order.user_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐づいてなければ購入できない' do
+        @order.item_id = nil
+        @order.valid?
+        expect(@order.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end
