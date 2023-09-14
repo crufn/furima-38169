@@ -24,5 +24,4 @@ class Item < ApplicationRecord
   validates :daysdelivery_id, presence: true, numericality: { other_than: 1 }
   validates :region_id, presence: true, numericality: { other_than: 1 }
 
-
 end
