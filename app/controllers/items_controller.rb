@@ -45,16 +45,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-商品購入機能
     current_user.id == @item.user_id
     if @item.destroy
       redirect_to root_path
     end
-    if current_user.id == @item.user_id
-       @item.destroy
-    end
-      redirect_to root_path
-main
   end
 
   private
