@@ -22,6 +22,7 @@
       </span>
     </div>
 
+<% if user_signed_in? %>
   <% if current_user.id == @item.user_id&& !@item.purchase_record.present? %>
     <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
@@ -29,6 +30,7 @@
   <% elsif !@item.purchase_record.present? %>
     <%= link_to "購入画面に進む", item_orders_path(@item) ,data: { turbo: false },class:"item-red-btn"%>
   <% end %>
+<% end %>
 
     <div class="item-explain-box">
       <span><%= @item.item_explanation %></span>
